@@ -69,7 +69,7 @@ pipeline {
             cp ../${DEPLOY_YAML} .
             cp ../${env.DOCKERFILE_NAME} .
             
-            git add ${DEPLOY_YAML}
+            git add .
             git commit -m "Update from pipeline build ${BUILD_NUMBER}" 
             git push https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/test2-gitops.git ${params.DEV_BRANCH}
         """
