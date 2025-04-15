@@ -66,7 +66,7 @@ pipeline {
             git clone https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/gitops-test2.git git-temp
             cd git-temp
             git checkout ${params.DEV_BRANCH} || git checkout -b ${params.DEV_BRANCH}
-            cp ../${DEPLOY_YAML} .
+            cp -rf ../${DEPLOY_YAML} .
             cp ../${env.DOCKERFILE_NAME} .
             
             git add .
