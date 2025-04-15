@@ -62,9 +62,10 @@ pipeline {
         withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
     script {
         sh """
-            rm -rf git-temp
+    
+            rm -rf temp2
             git clone https://github.com/ganesh-redy/test2.git
-            cd git-temp
+            cd temp2
             git checkout ${params.DEV_BRANCH} || git checkout -b ${params.DEV_BRANCH}
             cp -rf ../${DEPLOY_YAML} .
             cp ../${env.DOCKERFILE_NAME} .
