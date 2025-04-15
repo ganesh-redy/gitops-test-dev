@@ -32,13 +32,13 @@ pipeline {
                 script {
                     def dockerfile = ''
                     def imageName = ''
-                    if (params.DEV_BRANCH == 'dev1') {
+                    if (params.DEV_BRANCH == 'deve-1') {
                         dockerfile = 'Dockerfile'
                         imageName = 'dev-test1'
-                    } else if (params.DEV_BRANCH == 'dev2') {
+                    } else if (params.DEV_BRANCH == 'deve-2') {
                         dockerfile = 'web1.Dockerfile'
                         imageName = 'dev-test2'
-                    } else if (params.DEV_BRANCH == 'dev3') {
+                    } else if (params.DEV_BRANCH == 'deve-3') {
                         dockerfile = 'web2.Dockerfile'
                         imageName = 'dev-test3'
                     }
