@@ -63,9 +63,9 @@ pipeline {
     script {
         sh """
     
-           
-            git clone https://github.com/ganesh-redy/test2.git
-            cd test2
+           rm -rf git-temp
+            git clone https://github.com/ganesh-redy/test2.git git-temp
+            cd git-temp
             git checkout ${params.DEV_BRANCH} || git checkout -b ${params.DEV_BRANCH}
             cp -rf ../${DEPLOY_YAML} .
             cp ../${env.DOCKERFILE_NAME} .
@@ -73,9 +73,7 @@ pipeline {
             git add .
             git commit -m "Update from pipeline build ${BUILD_NUMBER}" 
             git push https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/test2.git ${params.DEV_BRANCH}
-            sleep 5
-            cd ..
-            rm -rf test2
+        
         """
     }
 }
