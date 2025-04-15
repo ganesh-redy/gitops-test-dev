@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'DEV_BRANCH', choices: ['dev1', 'dev2', 'dev3'], description: 'Select developer branch')
+        choice(name: 'DEV_BRANCH', choices: ['deve-1', 'deve-2', 'deve-3'], description: 'Select developer branch')
     }
 
     environment {
