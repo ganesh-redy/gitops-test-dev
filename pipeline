@@ -75,7 +75,7 @@ pipeline {
             git push https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/test2.git ${params.DEV_BRANCH}
             sleep 5
             cd ..
-            rm -rf temp2
+            rm -rf test2
         """
     }
 }
