@@ -1,5 +1,3 @@
-
-
 pipeline {
     agent any
 
@@ -10,7 +8,6 @@ pipeline {
     environment {
         IMAGE_PREFIX = "ganesh6498"
         DEPLOY_YAML = "deployment.yaml"
-       
     }
 
     stages {
@@ -55,29 +52,24 @@ pipeline {
             }
         }
 
-        
-
         stage('Push to Branch') {
-    steps {
-        withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-    script {
-        sh """
-            rm -rf git-temp
-            git clone https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/gitops-test2.git git-temp
-            cd git-temp
-            git checkout -b main
-            cp ../${DEPLOY_YAML} .
-            cp ../${env.DOCKERFILE_NAME} .
-            
-            git add .
-            git commit -m "Update from pipeline build ${BUILD_NUMBER}" 
-            git push https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/single-branch.git main
-    }
-}
-
-
-    }
-}
-
+            steps {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                    script {
+                        sh """
+                        rm -rf git-temp
+                        git clone https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/gitops-test2.git git-temp
+                        cd git-temp
+                        git checkout -b main || git checkout main
+                        cp ../${DEPLOY_YAML} .
+                        cp ../${env.DOCKERFILE_NAME} .
+                        git add .
+                        git commit -m "Update from pipeline build ${BUILD_NUMBER}" || echo "Nothing to commit"
+                        git push https://ganesh-redy:${GITHUB_TOKEN}@github.com/ganesh-redy/single-branch.git main
+                        """
+                    }
+                }
+            }
+        }
     }
 }
